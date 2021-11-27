@@ -5,7 +5,7 @@
 
     2.1 [Változók](#variables)
     
-    2.2 [Elágazások: if-else](#if-else)
+    2.2 [Elágazások: if-else](#if-else if)
 
     2.3 [Ciklusok: for](#for)
 ***
