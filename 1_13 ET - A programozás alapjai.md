@@ -1,0 +1,159 @@
+# A programozás alapjai segédanyag
+## Tartalomjegyzék
+1. [Bevezetés](#introduction)
+2. [A programozás alapjai](#basics)
+
+    2.1 [Változók](#variables)
+    
+    2.2 [Elágazások: if-else](#if-else)
+
+    2.3 [Ciklusok: for](#for)
+***
+### 1. Bevezetés<a name = "bevezetés"></a>
+A segédanyagban az eddig tanultak találhatóak meg, minden egyes héten az anyag kibővítésre kerül az órákon elhangzottakkal, valamint a hozzá tartozó példákkal.
+
+Az anyagot kizárólag felkészüléshez lehet használni bármilyen kérdés van elérnek a **bozo.tamas.daniel@gmail.com** e-mail címen, vagy a személyes Facebook-omon **facebook.com/bozotamasdaniel**.
+***
+### 2. A programozás alapjai<a name = "basics"></a>
+Az órán két lehetőség van programozási feladat elvégzésére:
+
+1. Online programozó felület használata. (pl.: www.w3schools.com)
+2. Integrált Fejlesztői környezet használata. (pl.: _Visual Studio_)
+
+Ebben az anyagban a példák _Visual Studio_-ban vannak írva.
+
+***
+### **Változók**<a name = "variables"></a>
+
+Mielőtt nekikezdenénk a programok írásának meg kell ismerkednünk a program legalapvetőbb egységével, ami nem más mint a változó.
+
+A változók a programban azokat az adatokat tárolják, melyekre szükségünk van. A változókat elképzelhetjük egy dobozként. Bele tudunk rakni dolgokat és amikor szükségünk van rá, ki tudjuk venni belőle.
+
+Egy változónak 3 fő része van:
+
+1. Típus
+2. Név
+3. Érték
+
+A változó típusa határozza meg azt, hogy a memóriában mekkora helyet foglal, illetve azt is, hogy milyen adatot tudunk tárolni benne.
+
+A változó neve egy hivatkozás lesz, melynek segítségével a programból el tudjuk érni azt a nevesített memóriaterületet, melyen a változó adatot tárol.
+
+A változó értéke az általa tárolt adat lesz.
+
+Nézzünk egy példát változóra: `int szám1 = 15;`. Ebben az esetben a változónk típusa az **int**, azaz egész számot fogunk tárolni benne. A változónk neve **szám1**, a későbbiekben ezt felhasználva tudunk hivatkozni a számra. Értéke pedig **15**.
+
+Természetesen nem csak egész számokat tudunk tárolni egy programban. Nézzünk néhány példát a valtozók típusaira, és arra, hogy ezek milyen értéket tárolnak.
+| Típus  | Tárolt érték                | Példa    | Deklaráció                    |
+| ------ | --------------------------- | -------- | ----------------------------- |
+| int    | Előjeles egész szám         | 15 / -15 | `int a = 15;` / `int a = -15` |
+| uint   | Előjel nélküli egész szám   | 15       | `uint a = 15;`                |
+| float  | 6-9 karakterből álló tört   | 15.154f  | `float a = 15.154f;`          |
+| double | 15-17 karakterből álló tört | 15.154   | `double a = 15.154;`          |
+| char   | Egyetlen karakter           | 'a'      | `char a = 'a';`               |
+| string | Karakterlánc / Szöveg       | "alma"   | `string a = "alma";`          |
+
+Ezek a típusok lesznek azok, melyek az év során használni fogunk.
+***
+### **Elágazások: if-else if**<a name = "if-else"></a>
+
+A programozásban az elágazások a vezérlési szerkezetek azon részét képzik, melyek lényege, hogy egy feltétel alapján a program több féle módon futhat le. A legegyszerűbb elágazás az `if-else` szerkezet, melyet a következőképpen hozunk létre:
+```csharp
+    if(feltétel) //a feltétel vagy IGAZ vagy HAMIS lehet
+    {
+        //futtatandó kód, ha a feltétel IGAZ
+    }
+    else //akkor fog lefutni, ha a feltétel HAMIS
+    {
+        //futtatandó kód
+    }
+```
+Amennyiben összetetteb vizsgálatot szeretnénk végezni hasnálhatunk if-else if-...-else szerkezetet, ahol tetszőleges számú feltételünk van, melyeket mindig az _'if'_ után fogunk írni, például:
+```csharp
+    if(feltétel1){ ... }
+    else if(feltétel2){ ... }
+    else if(feltétel3){ ... }
+    ...
+    else { ... }
+```
+Az ilyen módon megírt elágazások lényege, hogy egymás után több feltételt is meg tudunk vizsgálni és az a kódrészlet fog lefutni, amelyre szükségünk van.
+***
+Nézzünk egy egszerű példát az előzőekre.
+
+```csharp
+    int szam1 = 10; //létrehozunk egy 'int' típusú, 'szam1' nevű változó, melynek értéke 10
+    int szam2 = 20; //létrehozunk egy 'int' típusú, 'szam2' nevű változó, melynek értéke 20
+
+    //Vizsgáljuk meg, hogy a két szám közül melyik lesz a nagyobb.
+    if(szam1 > szam2) //Amennyiben a szam1 értéke nagyobb, mint a szam2-é
+    {
+        Console.WriteLine("Az első szám a nagyobb");
+    }
+    else
+    {
+        Console.WriteLine("A második szám a nagyobb");
+    }
+```
+Az előző kód első ránézésre teljesen rendben van, azonban van egy hiba benne.
+
+Mi történik akkor, ha a két szám egyenlő? -- A válasz: A program az 'else'-ben lévő kódot fogja lefuttatni, azaz kiírja a képernyőre, hogy a szam2 a nagyobb, holott ez nem igaz.
+
+Ahhoz, hogy ezt kijavítsuk a következőképpen kell a kódot átírni:
+```csharp
+    int szam1 = 10; //létrehozunk egy 'int' típusú, 'szam1' nevű változó, melynek értéke 10
+    int szam2 = 20; //létrehozunk egy 'int' típusú, 'szam2' nevű változó, melynek értéke 20
+
+    //Vizsgáljuk meg, hogy a két szám közül melyik lesz a nagyobb.
+    if(szam1 > szam2) //Amennyiben a szam1 értéke nagyobb, mint a szam2-é
+    {
+        Console.WriteLine("Az első szám a nagyobb");
+    }
+    else if(szam1 < szam2)
+    {
+        Console.WriteLine("A második szám a nagyobb");
+    }
+    else
+    {
+        Console.WriteLine("A két szám egyenlő");
+    }
+```
+Így a program már hibátlanul fog működni, valamint minden egyes lehetőséget le fogunk fedni, ugyanis két szám közül vagy az egyik nagyobb, vagy a másik, vagy a két szám egyenlő.
+***
+### ***Ciklusok: for***<a name = 'for'></a>
+
+A 'for' ciklus egy olyan vezérlési szerkezet, ahol egy adott kódott többször szeretnénk lefuttatni, vagy teljesen ugyanúgy minden alkalommal, vagy minimális különbséggel.
+
+A 'for' ciklus megadott lépésszámszor fog lefutni, azaz valamettől-valameddig fut. Ezt az intervallumot egy ciklusváltozó segítségével fogjuk meghatározni. Amikor deklarálunk egy 'for' ciklust létrehozunk egy ciklusváltozót (ez lesz a kezdőpont, azaz ettől fog futni a ciklus), valamint meghatározzuk azt is, hogy a ciklusváltozó maximális értéke mi lesz (ez lesz a végpont, azaz eddig fog futni a ciklus).
+
+Kódban ez a következőképpen néz ki:
+```csharp
+    for(int i = 0; i < 10; i++)
+    {
+        //futtatandó kód
+    }
+    //Ez a ciklus 10-szer fut le, méghozzá 0-tól 9-ig
+```
+A ciklusváltozó deklarálása: `int i = 0;`
+
+A végpont meghatározása: `i < 10;`
+
+A ciklus létrehozásakor az `i++` felel azért, hogy a ciklusunk léptetésre kerüljön, így a ciklusváltozó el fogja érni előbb-utóbb a végpontot.
+
+Ha nem `<`-et használunk, hanem `<=`-t azzal azt fogjuk elérni, hogy a ciklusváltozónk legmagasabb értéke megegyezik a végponttal. Az előző példát ez úgy változtatná meg, hogy a ciklus 0-tól 10-ig futna.
+
+Nézzünk meg két egyszerű példakódot a 'for' ciklusra, az egyik 10-szer fogja kiírni az 1-es számot, a másik pedig 1-től 10-ig fogja kiírni a számokat.
+```csharp
+for(int i = 0; i < 10, i++)
+{
+    Console.WriteLine(1); /*Minden alkalommal, amikor lefut a ciklus kiírjuk az  
+                            1-es számot. Mivel 10-szer fog lefutni a ciklus 
+                            (0-tól 9-ig), ezért 10-szer írjuk ki.*/
+}
+
+for(int i = 1; i <= 10; i++)
+{
+     Console.WriteLine(i); /*Minden alkalommal, amikor lefut a ciklus az 
+                            'i' étékét írjuk ki. Ez az érték 1-től 10-ig minden
+                            alkalommal amikor lefut a ciklus 1-el fog nőni.*/
+}
+```
