@@ -11,7 +11,14 @@
 
     2.4 [Összetett feltételek](#expressions)
 
-    2.5 [Ciklusok: for](#for)
+    2.5 [Ciklusok](#cycles)
+
+    * 2.5.1 [While](#while)
+    * 2.5.2 [For](#for)
+    * 2.5.3 [Do-while](#do-while)
+
+
+    
 ***
 ### 1. Bevezetés<a name = "bevezetés"></a>
 A segédanyagban az eddig tanultak találhatóak meg, minden egyes héten az anyag kibővítésre kerül az órákon elhangzottakkal, valamint a hozzá tartozó példákkal.
@@ -137,8 +144,10 @@ Mi történik akkor, ha a két szám egyenlő? -- A válasz: A program az 'else'
 
 Ahhoz, hogy ezt kijavítsuk a következőképpen kell a kódot átírni:
 ```csharp
-    int szam1 = 10; //létrehozunk egy 'int' típusú, 'szam1' nevű változó, melynek értéke 10
-    int szam2 = 20; //létrehozunk egy 'int' típusú, 'szam2' nevű változó, melynek értéke 20
+    int szam1 = 10; /*létrehozunk egy 'int' típusú, 'szam1' nevű
+    változó, melynek értéke 10*/
+    int szam2 = 20; /*létrehozunk egy 'int' típusú, 'szam2' nevű
+    változó, melynek értéke 20*/
 
     //Vizsgáljuk meg, hogy a két szám közül melyik lesz a nagyobb.
     if(szam1 > szam2) //Amennyiben a szam1 értéke nagyobb, mint a szam2-é
@@ -174,41 +183,101 @@ Az előzőeket úgynevezett 'igazságtábla' segítségével tudjuk ábrázolni.
 |   1   |   1   |   0   |   1    |   1    |   0    |    0    |      1      |
 |   1   |   1   |   1   |   1    |   1    |   1    |    1    |      1      |
 ***
-### ***Ciklusok: for***<a name = 'for'></a>
+### **A ciklusok alapjai** <a name = 'cycles'></a>
+Az év során 3 ciklussal fogunk megismerkedni, ezek a `for`, a `while` és a `do-while`.<br> Ezt a három ciklust két kategóriába tudjuk sorolni, elöl-, illetve hátultesztelős. Minden ciklus addig fog futni, amíg egy megadott feltétel teljesül (hasonlóan az elágazásokhoz, melyek akkor futnak le, ha teljesül a feltétel), azonban ennek a feltételnek a vizsgálata történhet a ciklusmag lefutása előtt, vagy után is.<br>Egy ciklus magján azt a kódrészletet értjük, amely a feltétel teljesülásekor le fog futni. A ciklusmagban általában vagy ugyanaz a kód fut le újra és újra, vagy egy olyan kód, melyben minimális különbség van.<br>Például írhatunk olyan ciklust, mely egymás után kiírja 10-szer az 1-es számot (ekkor ugyanaz a kód fut le 10-szer), vagy egy olyan ciklust, amely 1-től 10-ig írja ki a számokat (ekkor a kódban minimális különbség van csak, mégpedig az, hogy aktuálisan melyik szám kerül kiírásra).
 
-A 'for' ciklus egy olyan vezérlési szerkezet, ahol egy adott kódott többször szeretnénk lefuttatni, vagy teljesen ugyanúgy minden alkalommal, vagy minimális különbséggel.
+Az elöl- és hátultesztelős ciklusok közötti különbség, hogy az elöltesztelős ciklusoknál (**while, for**) a feltétel vizsgálata a ciklusmag lefutása előtt történik meg, ezért amennyiben a feltétel az első vizsgálat alkalmával HAMIS, a ciklusmag nem fog egyszer sem lefutni.
 
-A 'for' ciklus megadott lépésszámszor fog lefutni, azaz valamettől-valameddig fut. Ezt az intervallumot egy ciklusváltozó segítségével fogjuk meghatározni. Amikor deklarálunk egy 'for' ciklust létrehozunk egy ciklusváltozót (ez lesz a kezdőpont, azaz ettől fog futni a ciklus), valamint meghatározzuk azt is, hogy a ciklusváltozó maximális értéke mi lesz (ez lesz a végpont, azaz eddig fog futni a ciklus).
+Ezzel szemben a hátultesztelős ciklusnál (**do-while**) a feltétel vizsgálata a ciklusmag lefutása után történik meg, ezért a ciklusmag legalább egyszer le fog futni, még akkor is, ha az első vizsgálatnál a feltétel HAMIS lesz.
+***
+#### ***Ciklusok: while***<a name = 'while'></a>
+A while ciklus egy elöltesztelős ciklus, melynek feltétele egy IGAZ vagy egy HAMIS értéket fog visszaadni, ami meghatározza, hogy a ciklusmag lefut-e vagy sem.
+
+Kódban ez a következőképpen néz ki:
+```csharp
+    while(<feltétel>)
+    {
+        //ciklusmag (akkor fut le, ha a feltétel igaz)
+    }
+```
+Mivel a feltétel vizsgálata a ciklusmag lefutása előtt történik meg, előfordulhat olyan eset, hogy a ciklusmag egyszer sem fog lefutni.
+***
+#### ***Ciklusok: for***<a name = 'for'></a>
+
+A 'for' ciklus feltétele egy intervallumot fog meghatározni egy ciklusváltozó segítségével, azaz valamettől-valameddig fut. Amikor deklarálunk egy 'for' ciklust létrehozzuk a ciklusváltozót (ez lesz a kezdőpont, azaz ettől fog futni a ciklus), valamint meghatározzuk azt is, hogy a ciklusváltozó maximális értéke mi lesz (ez lesz a végpont, azaz eddig fog futni a ciklus).
 
 Kódban ez a következőképpen néz ki:
 ```csharp
     for(int i = 0; i < 10; i++)
     {
-        //futtatandó kód
+        //ciklusmag (akkor fut le, ha a feltétel igaz)
     }
     //Ez a ciklus 10-szer fut le, méghozzá 0-tól 9-ig
 ```
 A ciklusváltozó deklarálása: `int i = 0;`
 
-A végpont meghatározása: `i < 10;`
+A végpont meghatározása: `i < 10;` (ez a ciklusunk feltétele)
 
 A ciklus létrehozásakor az `i++` felel azért, hogy a ciklusunk léptetésre kerüljön, így a ciklusváltozó el fogja érni előbb-utóbb a végpontot.
 
-Ha nem `<`-et használunk, hanem `<=`-t azzal azt fogjuk elérni, hogy a ciklusváltozónk legmagasabb értéke megegyezik a végponttal. Az előző példát ez úgy változtatná meg, hogy a ciklus 0-tól 10-ig futna.
+Ha nem "`<`"-et használunk, hanem "`<=`"-t azzal azt fogjuk elérni, hogy a ciklusváltozónk legmagasabb értéke megegyezik a végponttal. Az előző példát ez úgy változtatná meg, hogy a ciklus 0-tól 10-ig futna.
 
 Nézzünk meg két egyszerű példakódot a 'for' ciklusra, az egyik 10-szer fogja kiírni az 1-es számot, a másik pedig 1-től 10-ig fogja kiírni a számokat.
 ```csharp
 for(int i = 0; i < 10, i++)
 {
-    Console.WriteLine(1); /*Minden alkalommal, amikor lefut a ciklus kiírjuk az  
-                            1-es számot. Mivel 10-szer fog lefutni a ciklus 
-                            (0-tól 9-ig), ezért 10-szer írjuk ki.*/
+    Console.WriteLine(1); /*Minden alkalommal, amikor lefut a ciklus
+    kiírjuk az 1-es számot. Mivel 10-szer fog lefutni a ciklus
+    (0-tól 9-ig), ezért 10-szer írjuk ki.*/
 }
 
 for(int i = 1; i <= 10; i++)
 {
-     Console.WriteLine(i); /*Minden alkalommal, amikor lefut a ciklus az 
-                            'i' étékét írjuk ki. Ez az érték 1-től 10-ig minden
-                            alkalommal amikor lefut a ciklus 1-el fog nőni.*/
+     Console.WriteLine(i); /*Minden alkalommal, amikor lefut a
+     ciklus az 'i' étékét írjuk ki. Ez az érték 1-től 10-ig minden
+     alkalommal amikor lefut a ciklus 1-el fog nőni.*/
 }
 ```
+***
+#### ***Ciklusok: do-while***<a name = 'do-while'></a>
+A do-while ciklus egy hátultesztelős ciklus, azaz a ciklusmagja legalább egyszer le fog futni, mivel a feltétel a ciklusmag után kerül vizsgálatra.
+
+A do-while ciklus létrehozása:
+```csharp
+    do
+    {
+        //ciklusmag (legalább egyszer lefut)
+    }while(<feltétel>);
+```
+A következőkben néhány egyszerű ciklusra nézünk példát, magyarázattal együtt.
+
+```csharp
+    while(true)
+    {
+        Console.WriteLine("Hello!");
+        /*Ez egy úgynevezett végtelen ciklus, mivel a
+        feltétele midig az IGAZ értéket adja vissza.
+        Az ilyen ciklusoknak a futása akkor áll meg,
+        ha a programot leállítjuk, vagy valamilyen 
+        esetben használjuk a "break;" utasítást.*/
+    }
+    ----------------------------------------------------------------
+    int a = 10;
+    do
+    {
+        Console.WriteLine(a);
+        a++;
+    }while(a <= 20);
+    /*Ez a ciklus 10-től 20-ig fogja kiírni a számokat
+    egyesével. Amikor a 20 kiírásra került az 'a'
+    változó értékét növeljük 21-re, majd megvizsgáljuk a feltételt.
+    Mivel a 21 <= 20 feltétel értéke HAMIS lesz, ezért a ciklusmag
+    már nem fog mégegyszer lefutni.*/
+    ----------------------------------------------------------------
+    for(int i = 1; i > -10; i--)
+    {
+        Console.WriteLine(i);
+    }
+    /*Az előző 'for' ciklus példával ellentétben itt nem növeljük
+    a ciklusváltozó értékét, hanem csökkentjük. Ezt az 'i--'
+    operátor segítségével tudjuk elérni.*/
