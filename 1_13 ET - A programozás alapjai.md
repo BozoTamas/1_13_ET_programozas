@@ -5,9 +5,13 @@
 
     2.1 [Változók](#variables)
     
-    2.2 [Elágazások: if-else](#if-else if)
+    2.2 [Operátorok](#operators)
 
-    2.3 [Ciklusok: for](#for)
+    2.3 [Elágazások: if-else](#if-else)
+
+    2.4 [Összetett feltételek](#expressions)
+
+    2.5 [Ciklusok: for](#for)
 ***
 ### 1. Bevezetés<a name = "bevezetés"></a>
 A segédanyagban az eddig tanultak találhatóak meg, minden egyes héten az anyag kibővítésre kerül az órákon elhangzottakkal, valamint a hozzá tartozó példákkal.
@@ -54,6 +58,39 @@ Természetesen nem csak egész számokat tudunk tárolni egy programban. Nézzü
 | string | Karakterlánc / Szöveg       | "alma"   | `string a = "alma";`          |
 
 Ezek a típusok lesznek azok, melyek az év során használni fogunk.
+***
+### **Operátorok**<a name = "operators"></a>
+A programozásban operátorokat használunk arra, hogy változókkal/értékekkel műveleteket végezzünk. Egy művelet elvégzéséhez a következőkre van szükség:
+> - legalább egy operandus
+> - legalább egy operátor
+
+Az operandusok lehetnek változó hivatkozások, vagy konkrét értékek, amikkel dolgozni szeretnénk. <br>
+Az operátor az a művelet, melyet az operandusokon el szeretnénk végezni.
+
+Pl.: 12 + 23;<br>
+Ebben a példában az operandusaink a 12 és a 23 konkrét értékek és ezeken a összeadást szeretnénk elvégezni, melyet a '+' operátor jelez.
+
+Lehetőség van egy operandusú művelet elvégzésére is, ezek olyan speciális esetek, amikor az operandusunk értékét növelni, vagy csökkenteni szeretnénk 1-el.
+
+Pl.: Legyen adott egy `szam` nevű változónk, melynek értékét szeretnénk változtani.<br> Ha ezt az értéket növelni szeretnénk 1-el, akkor a ***szam++;***, ha csökkenteni, akkor pedig a ***szam--;*** parancsot kell használnunk.
+
+Nézzük meg a C# nyelvben leggyakrabban használt operátorokat.<br>A példa során az operandusok `szam1` és `szam2`.
+| Operátor | Elvégzett művelet          | Használat        | Példa (eredménnyel) |
+| :--------: | :-------------------------- | :---------------- | :------------------- |
+| `=`      | Értékadás                  | `szam1 = 10;`    | 10                  |
+| `+`      | Összeadás                  | `szam1 + szam2;` | 10 + 20 -> 30       |
+| `-`      | Kivonás                    | `szam1 - szam2;` | 10 - 5 -> 5         |
+| `*`      | Szorzás                    | `szam1 * szam2;` | 10 * 2 -> 20        |
+| `/`      | Osztás                     | `szam1 / szam2;` | 10 / 2 -> 5         |
+| `++`     | Érték növelése 1-el        | `szam1++;`       | 10 -> 11            |
+| `--`     | Érték csökkentése 1-el     | `szam1--;`       | 10 -> 9             |
+| `+=`     | Aktuális érték növelése    | `szam1 += 10;`   | 10 -> 20            |
+| `-=`     | Aktuális érték csökkentése | `szam1 -= 10;`   | 20 -> 10            |
+| `*=`     | Aktuális érték szorzása    | `szam1 *= 2;`    | 10 -> 20            |
+| `/=`     | Aktuális érték osztása     | `szam1 /= 2;`    | 20 -> 10            |
+| `%`      | Maradékos osztás           | `szam1 % 2`      | 10 -> 0             |
+
+Amennyiben több operandust használunk, a matematikai művelet végzési sorrend itt is teljesül.<br>Pl.: 10+(20-10)*2/2 = 20, mert (20-10) = 10 , 10 * 2 = 20 , 20 / 2 = 10 ,<br> 10 + 10 = 20.
 ***
 ### **Elágazások: if-else if**<a name = "if-else"></a>
 
@@ -118,6 +155,24 @@ Ahhoz, hogy ezt kijavítsuk a következőképpen kell a kódot átírni:
     }
 ```
 Így a program már hibátlanul fog működni, valamint minden egyes lehetőséget le fogunk fedni, ugyanis két szám közül vagy az egyik nagyobb, vagy a másik, vagy a két szám egyenlő.
+***
+
+### ***Összetett feltételek***<a name = 'expressions'></a>
+Az elágazások használatakor nem csak egy feltételünk lehet, hanem 2,3,...,n db. Ezeket valamilyen logikai kapcsolóval tudjuk egymáshoz kapcsolni és így egy nagy feltételt fogunk kapni, melyet a programunk kiértékel és ennek megfelelően fut le.<br>Logikai kapcsoló az ÉS (`&&`) és a VAGY(`||`). Ezek használatakor a következő szabályokra kell figyelni:
+> - Két vagy több ÉS-el összekapcsolt feltétel eredménye akkor IGAZ, ha a feltételek mindegyike IGAZ
+> - Két vagy több VAGY-al összekapcsolt feltétel eredménye akkor IGAZ, ha a feltételek közül legalább az egyik IGAZ
+
+Az előzőeket úgynevezett 'igazságtábla' segítségével tudjuk ábrázolni. A feltételek legyenek **`A`**, **`B`** és **`C`**. 
+|   A   |   B   |   C   | A && B | A II B | A && C | A&&B&&C | A II B II C |
+| :---: | :---: | :---: | :----: | :----: | :----: | :-----: | :---------: |
+|   0   |   0   |   0   |   0    |   0    |   0    |    0    |      0      |
+|   0   |   0   |   1   |   0    |   0    |   0    |    0    |      1      |
+|   0   |   1   |   0   |   0    |   1    |   0    |    0    |      1      |
+|   0   |   1   |   1   |   0    |   1    |   0    |    0    |      1      |
+|   1   |   0   |   0   |   0    |   1    |   0    |    0    |      1      |
+|   1   |   0   |   1   |   0    |   1    |   1    |    0    |      1      |
+|   1   |   1   |   0   |   1    |   1    |   0    |    0    |      1      |
+|   1   |   1   |   1   |   1    |   1    |   1    |    1    |      1      |
 ***
 ### ***Ciklusok: for***<a name = 'for'></a>
 
